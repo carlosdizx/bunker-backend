@@ -1,0 +1,31 @@
+DELETE http://localhost:8090/api/product/get/1
+Accept: application/json
+
+###
+PUT http://localhost:8090/api/product/get/1
+Content-Type: application/json
+
+{
+  "name": "Salchipapa BBQ",
+  "costPrice": 5000.0,
+  "salePrice": 6000.0
+}
+
+###
+GET http://localhost:8090/api/product/get/1
+Accept: application/json
+
+###
+POST http://localhost:8090/api/product/all
+Content-Type: application/json
+
+{
+  "name": "Salchipapa Mixta",
+  "costPrice": 5000.0,
+  "salePrice": 6000.0
+}
+
+###
+GET http://localhost:8090/api/product/all
+Accept: application/json
+
