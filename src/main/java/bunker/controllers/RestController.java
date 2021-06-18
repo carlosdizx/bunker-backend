@@ -315,18 +315,52 @@ public class RestController
         return invoiceService.getAll();
     }
 
-    @PostMapping("invoice/all")
-    public ResponseEntity<Map<String, Object>> saveInvoices(@RequestBody List<Invoice> invoices)
+    public ResponseEntity<Map<String, Object>> saveInvoices(Sale sale,@RequestBody List<Invoice> invoices)
     {
         RESPONSE.clear();
         try
         {
             for (int i = 0 ; i < invoices.size() ; i++)
             {
-                invoiceService.save(invoices.get(i));
+                final Invoice invoice = invoices.get(i);
+                invoice.setSale(sale);
+                invoiceService.save(invoice);
             }
             RESPONSE.put("Mensaje","Facturas guardadas");
             return new ResponseEntity(RESPONSE,HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //--------------------------- for Sale and Invoices ---------------------------
+    @PostMapping("sale/invoices/{direccion}/{id}")
+    public ResponseEntity<Map<String, Object>> saveSaleAndInvoices(
+            @RequestBody List<Invoice>invoices,
+            @PathVariable String direccion,
+            @PathVariable Integer id
+    )
+    {
+        RESPONSE.clear();
+        try
+        {
+            final Person person = personService.findByID(id);
+            if (person == null)
+            {
+                RESPONSE.put("Mensaje", "Persona no encontrada");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            final Sale sale = saleService.save(new Sale(direccion,person));
+            if (sale == null)
+            {
+                RESPONSE.put("Mensaje", "Venta no registrada");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            return saveInvoices(sale,invoices);
         }
         catch (DataAccessException e)
         {

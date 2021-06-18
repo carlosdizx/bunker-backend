@@ -1,9 +1,10 @@
 package bunker;
 
+import bunker.entidad.Sale;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Date;
+import java.util.ArrayList;
 
 @SpringBootApplication
 public class BkApplication {

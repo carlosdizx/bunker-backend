@@ -1,6 +1,7 @@
 package bunker.servicios.impl;
 
 import bunker.dao.SaleDao;
+import bunker.entidad.Invoice;
 import bunker.entidad.Sale;
 import bunker.servicios.api.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;

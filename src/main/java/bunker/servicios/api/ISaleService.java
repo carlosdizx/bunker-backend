@@ -1,6 +1,7 @@
 package bunker.servicios.api;
 
 
+import bunker.entidad.Invoice;
 import bunker.entidad.Sale;
 
 import java.util.List;

@@ -1,13 +1,11 @@
 package bunker.entidad;
 
-import bunker.modelos.ItemSale;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "sales")
@@ -38,9 +36,9 @@ public class Sale implements Serializable
 
     public Sale(){}
 
-    public Sale(int id, String direccion, Date created, Person person,List<ItemSale> items)
-    {
-
+    public Sale(String direccion, Person person) {
+        this.direccion = direccion;
+        this.person = person;
     }
 
     public int getId() {
@@ -73,5 +71,15 @@ public class Sale implements Serializable
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "id=" + id +
+                ", direccion='" + direccion + '\'' +
+                ", created=" + created +
+                ", person=" + person +
+                '}';
     }
 }
