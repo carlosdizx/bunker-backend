@@ -59,19 +59,79 @@ public class RestController
     @PostMapping("person/all")
     public ResponseEntity<Map<String, Object>> savePerson(@RequestBody Person pPerson)
     {
-        System.out.println("---->"+pPerson);
-        System.out.println("---->"+pPerson);
-        System.out.println("---->"+pPerson);
-        System.out.println("---->"+pPerson);
-        final Person person = personService.save(pPerson);
-        if (person == null)
+        RESPONSE.clear();
+        try
         {
-            RESPONSE.put("Mensaje", "No se pudo agregar a la persona");
-            return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            final Person person = personService.save(pPerson);
+            if (person == null)
+            {
+                RESPONSE.put("Mensaje", "No se pudo agregar a la persona");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            RESPONSE.put("Mensaje", "Se agrego a la persona con exito!");
+            return new ResponseEntity<>(RESPONSE, HttpStatus.OK);
         }
-        RESPONSE.put("Mensaje", "Se agrego a la persona con exito!");
-        return new ResponseEntity<>(RESPONSE, HttpStatus.OK);
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
+    @PutMapping("person/get/{id}")
+    public ResponseEntity<Map<String, Object>> updatePerson(@PathVariable Integer id,@RequestBody Person pPerson)
+    {
+        RESPONSE.clear();
+        try
+        {
+            final Person person = personService.findByID(id);
+            if (person == null)
+            {
+                RESPONSE.put("Mensaje", "Persona no encontrada, no se puede actualizar!");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            person.setName( pPerson.getName() );
+            person.setType( pPerson.getType() );
+            person.setAddress( pPerson.getAddress() );
+            person.setPhone( pPerson.getPhone() );
+            person.setEmail( pPerson.getEmail() );
+            personService.save(person);
+            RESPONSE.put("Mensaje", "Se actualizo a la persona con exito!");
+            return new ResponseEntity<>(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("person/get/{id}")
+    public ResponseEntity<Map<String, Object>> removePerson(@PathVariable Integer id)
+    {
+        RESPONSE.clear();
+        try
+        {
+            final Person person = personService.findByID(id);
+            if (person == null)
+            {
+                RESPONSE.put("Mensaje", "Persona no encontrada, no se puede eliminar!");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            personService.delete(id);
+            RESPONSE.put("Mensaje", "Persona eliminada");
+            return new ResponseEntity<>(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     //--------------------------- for Product ---------------------------
 

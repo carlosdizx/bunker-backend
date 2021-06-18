@@ -27,10 +27,7 @@ public class Person implements Serializable {
     @CreationTimestamp
     private Date created;
 
-    public Person()
-    {
-
-    }
+    public Person(){}
 
     public Integer getId() {
         return id;
