@@ -1,0 +1,35 @@
+DELETE http://localhost:8090/api/person/get/1
+Accept: application/json
+
+###
+PUT http://localhost:8090/api/person/get/1
+Content-Type: application/json
+
+{
+  "name": "Carlos Ernesto Díaz Basante",
+  "type": "Cliente",
+  "address": "Mz G casa 5, los héroes",
+  "phone": 3163930876,
+  "email": "carlodiaz@umarian.edu.co"
+}
+
+###
+GET http://localhost:8090/api/person/get/1
+Accept: application/json
+
+###
+POST http://localhost:8090/api/person/all
+Content-Type: application/json
+
+{
+  "name": "Carlos Ernesto Díaz Basante",
+  "type": "Cliente",
+  "address": "Mz G casa 5, los heroes",
+  "phone": 3163930876,
+  "email": "carlodiaz@umarian.edu.co"
+}
+
+###
+GET http://localhost:8090/api/person/all
+Accept: application/json
+
