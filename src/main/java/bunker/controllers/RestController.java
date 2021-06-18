@@ -1,8 +1,10 @@
 package bunker.controllers;
 
+import bunker.entidad.Invoice;
 import bunker.entidad.Person;
 import bunker.entidad.Product;
 import bunker.entidad.Sale;
+import bunker.servicios.api.IInvoiceService;
 import bunker.servicios.api.IPersonService;
 import bunker.servicios.api.IProductService;
 import bunker.servicios.api.ISaleService;
@@ -34,6 +36,9 @@ public class RestController
 
     @Autowired
     private ISaleService saleService;
+
+    @Autowired
+    private IInvoiceService invoiceService;
 
     //--------------------------- for Person ---------------------------
 
@@ -302,4 +307,32 @@ public class RestController
         }
     }
 
+    //--------------------------- for Invoice ---------------------------
+
+    @GetMapping("invoice/all")
+    public List<Invoice> getAllInvoices()
+    {
+        return invoiceService.getAll();
+    }
+
+    @PostMapping("invoice/all")
+    public ResponseEntity<Map<String, Object>> saveInvoices(@RequestBody List<Invoice> invoices)
+    {
+        RESPONSE.clear();
+        try
+        {
+            for (int i = 0 ; i < invoices.size() ; i++)
+            {
+                invoiceService.save(invoices.get(i));
+            }
+            RESPONSE.put("Mensaje","Facturas guardadas");
+            return new ResponseEntity(RESPONSE,HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
