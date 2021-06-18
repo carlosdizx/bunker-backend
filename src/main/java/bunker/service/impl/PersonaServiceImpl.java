@@ -3,11 +3,15 @@ package bunker.service.impl;
 import bunker.dao.PersonDao;
 import bunker.entidad.Person;
 import bunker.service.api.IPersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PersonaServiceImpl implements IPersonService
 {
+    @Autowired
     private PersonDao dao;
 
     @Override
