@@ -1,4 +1,4 @@
-package bunker.bk.entidad;
+package bunker.entidad;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

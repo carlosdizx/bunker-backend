@@ -1,4 +1,4 @@
-package bunker.bk.entidad;
+package bunker.entidad;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,9 +1,10 @@
-package bunker.bk.entidad;
+package bunker.entidad;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -20,4 +21,15 @@ public class Sale implements Serializable
     uniqueConstraints = {@UniqueConstraint(columnNames = {"sale_id", "product_id"})})
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Product> products;
+
+    private String direccion;
+
+    private Date created;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "persona_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Person person;
+
+
 }
