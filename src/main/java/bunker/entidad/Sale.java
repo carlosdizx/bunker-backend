@@ -1,5 +1,6 @@
 package bunker.entidad;
 
+import bunker.modelos.ItemSale;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -36,6 +37,11 @@ public class Sale implements Serializable
     private Person person;
 
     public Sale(){}
+
+    public Sale(int id, String direccion, Date created, Person person,List<ItemSale> items)
+    {
+
+    }
 
     public int getId() {
         return id;

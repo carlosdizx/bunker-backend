@@ -1,21 +1,21 @@
-package bunker.service.impl;
+package bunker.servicios.impl;
 
-import bunker.dao.ProductDao;
-import bunker.entidad.Product;
-import bunker.service.api.IProductService;
+import bunker.dao.SaleDao;
+import bunker.entidad.Sale;
+import bunker.servicios.api.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ProductServiceImpl implements IProductService
+public class SaleServiceImpl implements ISaleService
 {
     @Autowired
-    private ProductDao dao;
+    private SaleDao dao;
 
     @Override
-    public Product save(Product entity)
+    public Sale save(Sale entity)
     {
         return dao.save(entity);
     }
@@ -27,13 +27,13 @@ public class ProductServiceImpl implements IProductService
     }
 
     @Override
-    public Product findByID(Integer id)
+    public Sale findByID(Integer id)
     {
         return dao.findById(id).orElse(null);
     }
 
     @Override
-    public List<Product> getAll()
+    public List<Sale> getAll()
     {
         return dao.findAll();
     }

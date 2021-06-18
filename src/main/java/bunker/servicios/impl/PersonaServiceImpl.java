@@ -1,8 +1,8 @@
-package bunker.service.impl;
+package bunker.servicios.impl;
 
 import bunker.dao.PersonDao;
 import bunker.entidad.Person;
-import bunker.service.api.IPersonService;
+import bunker.servicios.api.IPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
