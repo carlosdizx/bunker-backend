@@ -3,6 +3,7 @@ package bunker.service.impl;
 import bunker.dao.ProductDao;
 import bunker.entidad.Product;
 import bunker.service.api.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements IProductService
 {
+    @Autowired
     private ProductDao dao;
 
     @Override
