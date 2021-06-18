@@ -1,7 +1,9 @@
 package bunker.controllers;
 
 import bunker.entidad.Person;
+import bunker.entidad.Product;
 import bunker.service.api.IPersonService;
+import bunker.service.api.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,9 @@ public class RestController
 
     @Autowired
     private IPersonService personService;
+
+    @Autowired
+    private IProductService productService;
 
     //--------------------------- for Person ---------------------------
 
@@ -134,6 +139,109 @@ public class RestController
 
 
     //--------------------------- for Product ---------------------------
+
+    @GetMapping("product/all")
+    public List<Product> getAllProducts()
+    {
+        return productService.getAll();
+    }
+
+    @GetMapping("product/get/{id}")
+    public ResponseEntity<Map<String, Object>> findProdcutById(@PathVariable Integer id)
+    {
+        RESPONSE.clear();
+        try
+        {
+            final Product product = productService.findByID(id);
+            if (product == null)
+            {
+                RESPONSE.put("Mensaje", "Producto no encontrado");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            RESPONSE.put("Producto", product);
+            return new ResponseEntity<>(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("product/all")
+    public ResponseEntity<Map<String, Object>> saveProduct(@RequestBody Product pProduct)
+    {
+        RESPONSE.clear();
+        try
+        {
+            final Product product = productService.save(pProduct);
+            if (product == null)
+            {
+                RESPONSE.put("Mensaje", "No se pudo agregar el producto");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            RESPONSE.put("Mensaje", "Se agrego el producto con exito!");
+            return new ResponseEntity<>(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("product/get/{id}")
+    public ResponseEntity<Map<String, Object>> updateProduct(@PathVariable Integer id,@RequestBody Product pProduct)
+    {
+        RESPONSE.clear();
+        try
+        {
+            final Product product = productService.findByID(id);
+            if (product == null)
+            {
+                RESPONSE.put("Mensaje", "Producto no encontrado, no se puede actualizar!");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            product.setName( pProduct.getName() );
+            product.setCostPrice( pProduct.getCostPrice() );
+            product.setSalePrice( pProduct.getSalePrice() );
+            productService.save(product);
+            RESPONSE.put("Mensaje", "Se actualizo el producto con exito!");
+            return new ResponseEntity<>(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("product/get/{id}")
+    public ResponseEntity<Map<String, Object>> removeProduct(@PathVariable Integer id)
+    {
+        RESPONSE.clear();
+        try
+        {
+            final Product product = productService.findByID(id);
+            if (product == null)
+            {
+                RESPONSE.put("Mensaje", "Producto no encontrado, no se puede eliminar!");
+                return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
+            }
+            productService.delete(id);
+            RESPONSE.put("Mensaje", "Producto eliminado");
+            return new ResponseEntity<>(RESPONSE, HttpStatus.OK);
+        }
+        catch (DataAccessException e)
+        {
+            RESPONSE.put("Mensaje", "No se ha logrado realizar la consulta en la base de datos");
+            RESPONSE.put("Error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+            return new ResponseEntity(RESPONSE, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     //--------------------------- for Sale ---------------------------
 }
