@@ -1,16 +1,16 @@
 package bunker.service.api;
 
-import bunker.entidad.Person;
+import bunker.entidad.Product;
 
 import java.util.List;
 
 public interface IProductService
 {
-    Person save(Person entity);
+    Product save(Product entity);
 
     void delete(Integer id);
 
-    Person findByID(Integer id);
+    Product findByID(Integer id);
 
-    List<Person> getAll();
+    List<Product> getAll();
 }
