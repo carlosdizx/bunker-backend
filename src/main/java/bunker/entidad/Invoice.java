@@ -13,7 +13,14 @@ public class Invoice implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int amoung;
+    private int quantity;
+
+    /**
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Product product;
+    */
 
     public int getId() {
         return id;
@@ -23,11 +30,11 @@ public class Invoice implements Serializable
         this.id = id;
     }
 
-    public int getAmoung() {
-        return amoung;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setAmoung(int amoung) {
-        this.amoung = amoung;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
