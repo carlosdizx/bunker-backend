@@ -2,8 +2,10 @@ package bunker.controllers;
 
 import bunker.entidad.Person;
 import bunker.entidad.Product;
+import bunker.entidad.Sale;
 import bunker.service.api.IPersonService;
 import bunker.service.api.IProductService;
+import bunker.service.api.ISaleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,9 @@ public class RestController
 
     @Autowired
     private IProductService productService;
+
+    @Autowired
+    private ISaleService saleService;
 
     //--------------------------- for Person ---------------------------
 
@@ -244,4 +249,10 @@ public class RestController
     }
 
     //--------------------------- for Sale ---------------------------
+
+    @GetMapping("sale/all")
+    public List<Sale> getAllSales()
+    {
+        return saleService.getAll();
+    }
 }
