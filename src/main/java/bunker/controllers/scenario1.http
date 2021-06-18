@@ -1,0 +1,69 @@
+POST http://localhost:8090/api/person/all
+Content-Type: application/json
+
+{
+  "name": "Carlos Díaz 1",
+  "type": "Cliente",
+  "address": "Mz G casa 5, los heroes",
+  "phone": 3163930876,
+  "email": "carlodiaz@umarian.edu.co"
+}
+
+###
+
+POST http://localhost:8090/api/person/all
+Content-Type: application/json
+
+{
+  "name": "Carlos Díaz 2",
+  "type": "Cliente",
+  "address": "Mz G casa 5, los heroes",
+  "phone": 3163930876,
+  "email": "carlodiaz@umarian.edu.co"
+}
+
+###
+
+POST http://localhost:8090/api/person/all
+Content-Type: application/json
+
+{
+  "name": "Carlos Díaz 3",
+  "type": "Cliente",
+  "address": "Mz G casa 5, los heroes",
+  "phone": 3163930876,
+  "email": "carlodiaz@umarian.edu.co"
+}
+
+###
+
+POST http://localhost:8090/api/person/all
+Content-Type: application/json
+
+{
+  "name": "Carlos Díaz  4",
+  "type": "Cliente",
+  "address": "Mz G casa 5, los heroes",
+  "phone": 3163930876,
+  "email": "carlodiaz@umarian.edu.co"
+}
+###
+
+POST http://localhost:8090/api/product/all
+Content-Type: application/json
+
+{
+  "name": "Salchipapa BBQ",
+  "costPrice": 5000.0,
+  "salePrice": 6000.0
+}
+###
+
+POST http://localhost:8090/api/product/all
+Content-Type: application/json
+
+{
+  "name": "Salchipapa Mixta",
+  "costPrice": 4000.0,
+  "salePrice": 5000.0
+}

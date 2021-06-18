@@ -1,0 +1,57 @@
+POST http://localhost:8090/api/sale/invoices/los_heroes/1
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "quantity": 1,
+    "product": {"id": 1, "name": "Salchipapa BBQ", "costPrice": 5000.0, "salePrice": 6000.0},
+    "sale": null
+  },
+  {
+    "id": 2,
+    "quantity": 2,
+    "product": {"id": 2, "name": "Salchipapa Mixta", "costPrice": 4000.0, "salePrice": 5000.0},
+    "sale": null
+  }
+]
+
+###
+POST http://localhost:8090/api/sale/invoices/los_heroes/2
+Content-Type: application/json
+
+[
+  {
+    "id": 2,
+    "quantity": 3,
+    "product": {"id": 1, "name": "Salchipapa BBQ", "costPrice": 5000.0, "salePrice": 6000.0},
+    "sale": null
+  }
+]
+###
+
+POST http://localhost:8090/api/sale/invoices/los_heroes/3
+Content-Type: application/json
+
+[
+  {
+    "id": 3,
+    "quantity": 1,
+    "product": {"id": 2, "name": "Salchipapa Mixta", "costPrice": 4000.0, "salePrice": 5000.0},
+    "sale": null
+  }
+]
+###
+
+POST http://localhost:8090/api/sale/invoices/los_heroes/4
+Content-Type: application/json
+
+[
+  {
+    "id": 4,
+    "quantity": 2,
+    "product": {"id": 2, "name": "Salchipapa Mixta", "costPrice": 4000.0, "salePrice": 5000.0},
+    "sale": null
+  }
+]
+###

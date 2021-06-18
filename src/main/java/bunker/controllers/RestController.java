@@ -316,9 +316,8 @@ public class RestController
         return invoiceService.getAll();
     }
 
-    public ResponseEntity<Map<String, Object>> saveInvoices(Sale sale,@RequestBody List<Invoice> invoices)
+    public ResponseEntity<Map<String, Object>> saveInvoices(Sale sale,List<Invoice> invoices)
     {
-        RESPONSE.clear();
         try
         {
             for (int i = 0 ; i < invoices.size() ; i++)
@@ -327,7 +326,7 @@ public class RestController
                 invoice.setSale(sale);
                 invoiceService.save(invoice);
             }
-            RESPONSE.put("Mensaje","Facturas guardadas");
+            RESPONSE.put("Mensaje2","Facturas guardadas");
             return new ResponseEntity(RESPONSE,HttpStatus.OK);
         }
         catch (DataAccessException e)
