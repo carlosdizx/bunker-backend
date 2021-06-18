@@ -284,6 +284,7 @@ public class RestController
         }
     }
 
+
     @PostMapping("sale/all")
     public ResponseEntity<Map<String, Object>> saveSale(@RequestBody Sale pSale)
     {
