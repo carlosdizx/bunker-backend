@@ -1,0 +1,68 @@
+POST http://localhost:8090/api/sale/invoices/los_heroes/1
+Content-Type: application/json
+
+[
+  {
+    "id": 1,
+    "quantity": 1,
+    "product": {
+      "id":1,
+      "name": "Salchipapa Mixta",
+      "costPrice": 5000.0,
+      "salePrice": 6000.0
+    },
+    "sale": null
+  },
+  {
+    "id": 2,
+    "quantity": 2,
+    "product": {
+      "id":2,
+      "name": "Salchipapa Mixta2",
+      "costPrice": 5000.0,
+      "salePrice": 6000.0
+    },
+    "sale": null
+  }
+]
+
+###
+GET http://localhost:8090/api/sale/get/1
+Accept: application/json
+
+###
+POST http://localhost:8090/api/sale/all
+Content-Type: application/json
+
+{
+  "direccion": "los_heroes",
+  "person": {
+    "id": 1,
+    "name": "Carlos Ernesto Díaz Basante",
+    "type": "Cliente",
+    "address": "Mz G casa 5, los heroes",
+    "phone": 3163930876,
+    "email": "carlodiaz@umarian.edu.co",
+    "created": "2021-06-18T19:29:51.589+00:00"
+  }
+},
+{
+"id": 2,
+"direccion": "los_heroes",
+"created": "2021-06-18T19:31:48.742+00:00",
+"person": {
+"id": 1,
+"name": "Carlos Ernesto Díaz Basante",
+"type": "Cliente",
+"address": "Mz G casa 5, los heroes",
+"phone": 3163930876,
+"email": "carlodiaz@umarian.edu.co",
+"created": "2021-06-18T19:29:51.589+00:00"
+}
+}
+
+###
+GET http://localhost:8090/api/sale/all
+Accept: application/json
+
+###
