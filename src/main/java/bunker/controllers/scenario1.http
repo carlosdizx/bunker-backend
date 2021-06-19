@@ -41,7 +41,7 @@ POST http://localhost:8090/api/person/all
 Content-Type: application/json
 
 {
-  "name": "Carlos Díaz  4",
+  "name": "Carlos Díaz 4",
   "type": "Cliente",
   "address": "Mz G casa 5, los heroes",
   "phone": 3163930876,
