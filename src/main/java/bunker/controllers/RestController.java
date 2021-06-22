@@ -338,10 +338,9 @@ public class RestController
     }
 
     //--------------------------- for Sale and Invoices ---------------------------
-    @PostMapping("sale/invoices/{direccion}/{id}")
+    @PostMapping("sale/invoices/{id}")
     public ResponseEntity<Map<String, Object>> saveSaleAndInvoices(
             @RequestBody List<Invoice>invoices,
-            @PathVariable String direccion,
             @PathVariable Integer id
     )
     {
@@ -354,7 +353,7 @@ public class RestController
                 RESPONSE.put("Mensaje", "Persona no encontrada");
                 return new ResponseEntity<>(RESPONSE, HttpStatus.NOT_FOUND);
             }
-            final Sale sale = saleService.save(new Sale(direccion,person));
+            final Sale sale = saleService.save(new Sale(person));
             if (sale == null)
             {
                 RESPONSE.put("Mensaje", "Venta no registrada");

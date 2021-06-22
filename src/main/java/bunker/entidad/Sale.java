@@ -24,8 +24,6 @@ public class Sale implements Serializable
     private List<Product> products;
     */
 
-    private String direccion;
-
     @CreationTimestamp
     private Date created;
 
@@ -36,8 +34,7 @@ public class Sale implements Serializable
 
     public Sale(){}
 
-    public Sale(String direccion, Person person) {
-        this.direccion = direccion;
+    public Sale( Person person) {
         this.person = person;
     }
 
@@ -47,14 +44,6 @@ public class Sale implements Serializable
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
     }
 
     public Date getCreated() {
@@ -77,7 +66,6 @@ public class Sale implements Serializable
     public String toString() {
         return "Sale{" +
                 "id=" + id +
-                ", direccion='" + direccion + '\'' +
                 ", created=" + created +
                 ", person=" + person +
                 '}';
