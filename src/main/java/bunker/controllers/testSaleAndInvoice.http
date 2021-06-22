@@ -1,4 +1,4 @@
-POST http://localhost:8090/api/sale/invoices/los_heroes/1
+POST http://localhost:8090/api/sale/invoices/1
 Content-Type: application/json
 
 [
@@ -17,7 +17,7 @@ Content-Type: application/json
 ]
 
 ###
-POST http://localhost:8090/api/sale/invoices/los_heroes/2
+POST http://localhost:8090/api/sale/invoices/2
 Content-Type: application/json
 
 [
@@ -30,7 +30,7 @@ Content-Type: application/json
 ]
 ###
 
-POST http://localhost:8090/api/sale/invoices/los_heroes/3
+POST http://localhost:8090/api/sale/invoices/3
 Content-Type: application/json
 
 [
@@ -43,7 +43,7 @@ Content-Type: application/json
 ]
 ###
 
-POST http://localhost:8090/api/sale/invoices/los_heroes/4
+POST http://localhost:8090/api/sale/invoices/4
 Content-Type: application/json
 
 [
